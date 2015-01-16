@@ -42,12 +42,12 @@
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
                         <Export-Package>
                             org.wso2.carbon.governance.wsdltool.ui.*,
+                            org.wso2.carbon.governance.resourcecompare.ui.*;
                         </Export-Package>
                         <Import-Package>
                             org.apache.axiom.*; version="${axiom.osgi.version.range}",
-                            org.wso2.carbon.registry.common.ui.*,
-                            org.wso2.carbon.registry.common.*,
-                            org.wso2.carbon.registry.core.*,
+                            org.wso2.carbon.registry.common.ui.*,com.predic8.*,
+                            org.wso2.carbon.registry.common.*,org.wso2.carbon.governance.resourcecompare.ui.*,
                             !javax.xml.namespace,
                             javax.xml.namespace; version=0.0.0,
                             javax.servlet;version="${imp.pkg.version.javax.servlet}",
@@ -134,5 +134,4 @@
             <artifactId>org.wso2.carbon.governance.wsdltool.stub</artifactId>
         </dependency>
     </dependencies>
-
 </project>

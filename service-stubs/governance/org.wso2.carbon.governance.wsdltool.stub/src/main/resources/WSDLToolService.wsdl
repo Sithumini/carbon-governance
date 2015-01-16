@@ -1,5 +1,5 @@
 <!--
- ~ Copyright (c) 2005-2010, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ ~ Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  ~
  ~ WSO2 Inc. licenses this file to you under the Apache License,
  ~ Version 2.0 (the "License"); you may not use this file except
@@ -15,109 +15,159 @@
  ~ specific language governing permissions and limitations
  ~ under the License.
  -->
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ax25="http://beans.wsdltool.governance.carbon.wso2.org/xsd" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:ns="http://services.wsdltool.governance.carbon.wso2.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://services.wsdltool.governance.carbon.wso2.org">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://services.wsdltool.governance.carbon.wso2.org" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax2208="http://beans.wsdltool.governance.carbon.wso2.org/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://services.wsdltool.governance.carbon.wso2.org">
     <wsdl:documentation>WSDLToolService</wsdl:documentation>
     <wsdl:types>
         <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://beans.wsdltool.governance.carbon.wso2.org/xsd">
-    <xs:complexType name="ServiceInfoBean">
-        <xs:all>
-            <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
-            <xs:element minOccurs="0" name="ownerAddress" nillable="true" type="xs:string" />
-            <xs:element minOccurs="0" name="ownerEmail" nillable="true" type="xs:string" />
-
-            <xs:element minOccurs="0" name="ownerName" nillable="true" type="xs:string" />
-            <xs:element minOccurs="0" name="ownerTelephone" nillable="true" type="xs:string" />
-            <xs:element minOccurs="0" name="wsdlURL" nillable="true" type="xs:string" />
-        </xs:all>
-    </xs:complexType>
-</xs:schema>
-        <xs:schema xmlns:ax26="http://beans.wsdltool.governance.carbon.wso2.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://services.wsdltool.governance.carbon.wso2.org">
-    <xs:import namespace="http://beans.wsdltool.governance.carbon.wso2.org/xsd" />
-    <xs:complexType name="Exception">
-
-        <xs:sequence>
-            <xs:element minOccurs="0" name="Exception" nillable="true" type="xs:anyType" />
-        </xs:sequence>
-    </xs:complexType>
-    <xs:element name="Exception">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" name="Exception" nillable="true" type="ns:Exception" />
-            </xs:sequence>
-
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="addMEXService">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" name="path" nillable="true" type="xs:string" />
-                <xs:element minOccurs="0" name="serviceInfo" nillable="true" type="ax26:ServiceInfoBean" />
-            </xs:sequence>
-        </xs:complexType>
-
-    </xs:element>
-</xs:schema>
+            <xs:complexType name="ServiceInfoBean">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="description" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ownerAddress" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ownerEmail" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ownerName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ownerTelephone" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="wsdlURL" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax2209="http://beans.wsdltool.governance.carbon.wso2.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://services.wsdltool.governance.carbon.wso2.org">
+            <xs:import namespace="http://beans.wsdltool.governance.carbon.wso2.org/xsd"/>
+            <xs:element name="WSDLToolServiceException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="WSDLToolServiceException" nillable="true" type="ns:Exception"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="Exception">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="getMembraneDiffArrayResult">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="resource1RegPath" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="resource2RegPath" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="type" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getMembraneDiffArrayResultResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addMEXService">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="path" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="serviceInfo" nillable="true" type="ax2208:ServiceInfoBean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
     </wsdl:types>
+    <wsdl:message name="getMembraneDiffArrayResultRequest">
+        <wsdl:part name="parameters" element="ns:getMembraneDiffArrayResult"/>
+    </wsdl:message>
+    <wsdl:message name="getMembraneDiffArrayResultResponse">
+        <wsdl:part name="parameters" element="ns:getMembraneDiffArrayResultResponse"/>
+    </wsdl:message>
+    <wsdl:message name="WSDLToolServiceException">
+        <wsdl:part name="parameters" element="ns:WSDLToolServiceException"/>
+    </wsdl:message>
     <wsdl:message name="addMEXServiceRequest">
-        <wsdl:part name="parameters" element="ns:addMEXService" />
+        <wsdl:part name="parameters" element="ns:addMEXService"/>
     </wsdl:message>
-    <wsdl:message name="Exception">
-        <wsdl:part name="parameters" element="ns:Exception" />
-    </wsdl:message>
-
     <wsdl:portType name="WSDLToolServicePortType">
+        <wsdl:operation name="getMembraneDiffArrayResult">
+            <wsdl:input message="ns:getMembraneDiffArrayResultRequest" wsaw:Action="urn:getMembraneDiffArrayResult"/>
+            <wsdl:output message="ns:getMembraneDiffArrayResultResponse" wsaw:Action="urn:getMembraneDiffArrayResultResponse"/>
+            <wsdl:fault message="ns:WSDLToolServiceException" name="WSDLToolServiceException" wsaw:Action="urn:getMembraneDiffArrayResultWSDLToolServiceException"/>
+        </wsdl:operation>
         <wsdl:operation name="addMEXService">
-            <wsdl:input message="ns:addMEXServiceRequest" wsaw:Action="urn:addMEXService" />
-            <wsdl:fault message="ns:Exception" name="Exception" wsaw:Action="urn:addMEXServiceException" />
+            <wsdl:input message="ns:addMEXServiceRequest" wsaw:Action="urn:addMEXService"/>
+            <wsdl:fault message="ns:WSDLToolServiceException" name="WSDLToolServiceException" wsaw:Action="urn:addMEXServiceWSDLToolServiceException"/>
         </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="WSDLToolServiceSoap11Binding" type="ns:WSDLToolServicePortType">
-        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
-        <wsdl:operation name="addMEXService">
-
-            <soap:operation soapAction="urn:addMEXService" style="document" />
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getMembraneDiffArrayResult">
+            <soap:operation soapAction="urn:getMembraneDiffArrayResult" style="document"/>
             <wsdl:input>
-                <soap:body use="literal" />
+                <soap:body use="literal"/>
             </wsdl:input>
-            <wsdl:fault name="Exception">
-                <soap:fault use="literal" name="Exception" />
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="WSDLToolServiceException">
+                <soap:fault use="literal" name="WSDLToolServiceException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="addMEXService">
+            <soap:operation soapAction="urn:addMEXService" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:fault name="WSDLToolServiceException">
+                <soap:fault use="literal" name="WSDLToolServiceException"/>
             </wsdl:fault>
         </wsdl:operation>
     </wsdl:binding>
-
     <wsdl:binding name="WSDLToolServiceSoap12Binding" type="ns:WSDLToolServicePortType">
-        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
-        <wsdl:operation name="addMEXService">
-            <soap12:operation soapAction="urn:addMEXService" style="document" />
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getMembraneDiffArrayResult">
+            <soap12:operation soapAction="urn:getMembraneDiffArrayResult" style="document"/>
             <wsdl:input>
-                <soap12:body use="literal" />
+                <soap12:body use="literal"/>
             </wsdl:input>
-            <wsdl:fault name="Exception">
-                <soap12:fault use="literal" name="Exception" />
-
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="WSDLToolServiceException">
+                <soap12:fault use="literal" name="WSDLToolServiceException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="addMEXService">
+            <soap12:operation soapAction="urn:addMEXService" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:fault name="WSDLToolServiceException">
+                <soap12:fault use="literal" name="WSDLToolServiceException"/>
             </wsdl:fault>
         </wsdl:operation>
     </wsdl:binding>
     <wsdl:binding name="WSDLToolServiceHttpBinding" type="ns:WSDLToolServicePortType">
-        <http:binding verb="POST" />
-        <wsdl:operation name="addMEXService">
-            <http:operation location="WSDLToolService/addMEXService" />
+        <http:binding verb="POST"/>
+        <wsdl:operation name="getMembraneDiffArrayResult">
+            <http:operation location="getMembraneDiffArrayResult"/>
             <wsdl:input>
-                <mime:content type="text/xml" part="addMEXService" />
-
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addMEXService">
+            <http:operation location="addMEXService"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
             </wsdl:input>
         </wsdl:operation>
     </wsdl:binding>
     <wsdl:service name="WSDLToolService">
         <wsdl:port name="WSDLToolServiceHttpsSoap11Endpoint" binding="ns:WSDLToolServiceSoap11Binding">
-            <soap:address location="https://10.202.137.7:9443/services/WSDLToolService.WSDLToolServiceHttpsSoap11Endpoint" />
+            <soap:address location="https://10.100.5.176:9443/services/WSDLToolService.WSDLToolServiceHttpsSoap11Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="WSDLToolServiceHttpsSoap12Endpoint" binding="ns:WSDLToolServiceSoap12Binding">
-            <soap12:address location="https://10.202.137.7:9443/services/WSDLToolService.WSDLToolServiceHttpsSoap12Endpoint" />
-
+            <soap12:address location="https://10.100.5.176:9443/services/WSDLToolService.WSDLToolServiceHttpsSoap12Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="WSDLToolServiceHttpsEndpoint" binding="ns:WSDLToolServiceHttpBinding">
-            <http:address location="https://10.202.137.7:9443/services/WSDLToolService.WSDLToolServiceHttpsEndpoint" />
+            <http:address location="https://10.100.5.176:9443/services/WSDLToolService.WSDLToolServiceHttpsEndpoint/"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

@@ -1,5 +1,5 @@
 <!--
- ~ Copyright (c) 2005-2011, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ ~ Copyright (c) 2005-2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  ~
  ~ WSO2 Inc. licenses this file to you under the Apache License,
  ~ Version 2.0 (the "License"); you may not use this file except
@@ -21,4 +21,20 @@
         <mediaType>application/vnd.wso2-mex+xml</mediaType>
         <uiPath>../governance/service/import/mex_add_ajaxprocessor.jsp</uiPath>
     </customUI>
+    <menus>
+        <menu>
+            <id>governance_wsdltool_menu</id>
+            <i18n-key>governance.wsdltool.menu</i18n-key>
+            <i18n-bundle>org.wso2.carbon.governance.wsdltool.ui.i18n.Resources</i18n-bundle>
+            <parent-menu>configure_extensions_menu</parent-menu>
+            <link>../resourcecompare/regResourceCompare.jsp</link>
+            <url-params>path=/</url-params>
+            <region>region3</region>
+            <order>6</order>
+            <style-class>manage</style-class>
+            <icon>../resourcecompare/images/wsdl.png</icon>
+            <require-permission>/permission/protected/manage</require-permission>
+        </menu>
+    </menus>
+
 </component>

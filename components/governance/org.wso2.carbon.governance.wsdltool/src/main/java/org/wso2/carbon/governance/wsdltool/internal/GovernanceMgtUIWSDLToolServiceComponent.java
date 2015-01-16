@@ -15,11 +15,11 @@
  */
 package org.wso2.carbon.governance.wsdltool.internal;
 
-import org.osgi.service.component.ComponentContext;
-import org.wso2.carbon.registry.core.service.RegistryService;
-import org.wso2.carbon.governance.wsdltool.util.CommonUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.osgi.service.component.ComponentContext;
+import org.wso2.carbon.governance.wsdltool.util.CommonUtil;
+import org.wso2.carbon.registry.core.service.RegistryService;
 
 /**
  * @scr.component name="org.wso2.carbon.governance.wsdltool"
@@ -30,14 +30,14 @@ import org.apache.commons.logging.LogFactory;
  */
 public class GovernanceMgtUIWSDLToolServiceComponent {
 
-    private static Log log = LogFactory.getLog(GovernanceMgtUIWSDLToolServiceComponent.class);
+    private static Log LOG = LogFactory.getLog(GovernanceMgtUIWSDLToolServiceComponent.class);
 
     protected void activate(ComponentContext context) {
-        log.debug("******* WSDL Tool bundle is activated ******* ");
+        LOG.debug("******* WSDL Tool bundle is activated ******* ");
     }
 
     protected void deactivate(ComponentContext context) {
-        log.debug("******* Governance WSDL Tool bundle is deactivated ******* ");
+        LOG.debug("******* Governance WSDL Tool bundle is deactivated ******* ");
     }
 
     protected void setRegistryService(RegistryService registryService) {

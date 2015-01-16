@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
  !
- ! Copyright 2006 The Apache Software Foundation.
+ ! Copyright 2015 The Apache Software Foundation.
  !
  ! Licensed under the Apache License, Version 2.0 (the "License");
  ! you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
         <transports>
             <transport>https</transport>
         </transports>
-        <parameter name="ServiceClass" locked="false">
+        <parameter name="ServiceClass">
             org.wso2.carbon.governance.wsdltool.services.WSDLToolService
         </parameter>
     </service>
