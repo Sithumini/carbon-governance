@@ -73,16 +73,16 @@ public class CommonUtil {
      * method for get InputStream of a registry resource
      *
      * @param registry Registry
-     * @param path registry resource path
+     * @param resourcePath registry resource path
      * @return InputStream of the resource
      * @throws RegistryException
      */
-    private static InputStream getResourceInputStream(Registry registry, String path) throws RegistryException {
+    private static InputStream getResourceInputStream(Registry registry, String resourcePath) throws RegistryException {
 
         try {
             InputStream resourceInputStream = null;
             // Derive registry resource
-            Resource resource = registry.get(path);
+            Resource resource = registry.get(resourcePath);
             // Convert registry resource content into byte array
             byte[] content = (byte[]) resource.getContent();
             if (content != null) {
@@ -93,7 +93,7 @@ public class CommonUtil {
             return resourceInputStream;
         } catch (RegistryException e) {
             String msg = "Could not get the InputStream of the resource at " +
-                    path + ".";
+                    resourcePath + ".";
             LOG.error(msg, e);
             throw new RegistryException(msg, e);
         }
@@ -126,8 +126,6 @@ public class CommonUtil {
             WsdlDiffGenerator diffGen = new WsdlDiffGenerator(resource1, resource2);
             // Get Difference list
             List<Difference> lst = diffGen.compare();
-            // Initialize result diff list
-            List resultDiffList = new ArrayList();
             for (Difference diff : lst) {
                 // Get the diff size
                 int diffSize = diff.getDiffs().size();

@@ -23,6 +23,7 @@ import org.apache.axis2.context.ConfigurationContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.CarbonConstants;
+import org.wso2.carbon.governance.wsdltool.stub.WSDLToolServiceExceptionException;
 import org.wso2.carbon.governance.wsdltool.stub.WSDLToolServiceStub;
 import org.wso2.carbon.governance.wsdltool.stub.beans.xsd.ServiceInfoBean;
 import org.wso2.carbon.registry.core.exceptions.RegistryException;
@@ -87,17 +88,20 @@ public class WSDLToolServiceClient {
      * @param resource1Path registry path of resource1
      * @param resource2Path registry path of resource2
      * @param type result type
-     * @return membrane result diff array
-     * @throws Exception
+     * @return String[] membrane result diff array
+     * @throws RegistryException
      */
-    public String[] getMembraneDiffArrayResult(String resource1Path, String resource2Path, String type) throws Exception {
+    public String[] getMembraneDiffArrayResult(String resource1Path, String resource2Path, String type)
+            throws RegistryException {
         try {
             // Get membrane diff array
-            return stub.getMembraneDiffArrayResult(resource1Path,resource2Path,type);
+            return stub.getMembraneDiffArrayResult(resource1Path, resource2Path, type);
         } catch (RemoteException e) {
-            String msg = "Cannot get the Membrane descriptive diff"
-                    + " . Backend service may be unavailable.";
-            throw new Exception(msg, e);
+            String msg = "Backend Service is unavailable";
+            throw new RegistryException(msg, e);
+        } catch (WSDLToolServiceExceptionException e) {
+            String msg = "Cannot get the Membrane descriptive diff";
+            throw new RegistryException(msg, e);
         }
     }
 
