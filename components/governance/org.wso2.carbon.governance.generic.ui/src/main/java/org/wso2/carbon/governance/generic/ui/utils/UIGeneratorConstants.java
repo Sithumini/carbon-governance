@@ -60,6 +60,7 @@ public final class UIGeneratorConstants {
     public static final String WIDGET_COLLAPSED = "collapsed";
     public static final String IS_RICH_TEXT = "isRichText";
     public static final String DEFAULT_NAMESPACE = ".*";
+    public static final String PASSWORD_FIELD = "password";
 
     public static final String READONLY_ATTRIBUTE = "readonly";
     public static final String PATH_START_WITH ="startsWith";

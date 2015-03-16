@@ -30,6 +30,7 @@ import org.wso2.carbon.governance.generic.ui.common.dataobjects.CloseAddLink;
 import org.wso2.carbon.governance.generic.ui.common.dataobjects.DateField;
 import org.wso2.carbon.governance.generic.ui.common.dataobjects.DropDown;
 import org.wso2.carbon.governance.generic.ui.common.dataobjects.OptionText;
+import org.wso2.carbon.governance.generic.ui.common.dataobjects.PasswordField;
 import org.wso2.carbon.governance.generic.ui.common.dataobjects.TextArea;
 import org.wso2.carbon.governance.generic.ui.common.dataobjects.TextField;
 import org.wso2.carbon.governance.generic.ui.common.dataobjects.UIComponent;
@@ -210,12 +211,67 @@ public class GenericUIGenerator {
                     } else if (UIGeneratorConstants.OPTION_TEXT_FIELD.equals(elementType)) {
                         inner = handleOptionTextField(request, config, widgetName, dataHead, table, subList, inner, arg,
                                 maxOccurs, tooltip);
+                    } else if (UIGeneratorConstants.PASSWORD_FIELD.equals(elementType)) {
+                        columnCount = handlePasswordField(isFilterOperation, markReadonly, hasValue, columns,
+                                widgetName, table, columnCount, inner, arg, tooltip);
                     }
                 }
             }
         }
         table.append("</table></div>");
         return table.toString();
+    }
+
+    private int handlePasswordField(boolean isFilterOperation, boolean markReadonly, boolean hasValue, int columns,
+            String widgetName, StringBuilder table, int columnCount, OMElement inner, OMElement arg, String tooltip) {
+        String value;
+        String mandatoryAttribute = arg.getAttributeValue(new QName(null, UIGeneratorConstants.MANDETORY_ATTRIBUTE));
+
+        boolean isReadOnly = false;
+
+        if (markReadonly && "true"
+                .equals(arg.getAttributeValue(new QName(null, UIGeneratorConstants.READONLY_ATTRIBUTE)))) {
+            isReadOnly = true;
+        }
+        if (isFilterOperation) {
+            mandatoryAttribute = "false";
+        }
+        if (inner != null) {
+            //if the element contains value is not null get the value
+            value = inner.getText();
+        } else {
+            value = arg.getAttributeValue(new QName(null, UIGeneratorConstants.DEFAULT_ATTRIBUTE));
+        }
+        if (columns > 2) {
+            if (columnCount == 0) {
+                table.append("<tr>");
+            }
+
+            UIComponent passwordField = new PasswordField(null, arg.getFirstChildWithName(new QName(null,
+                    UIGeneratorConstants.ARGUMENT_NAME)).getText(), null, null, widgetName,
+                    value, hasValue, isReadOnly, tooltip, false);
+            table.append(passwordField.generate());
+
+            columnCount++;
+            if (columnCount == columns) {
+                table.append("</tr>");
+                columnCount = 0;
+            }
+
+        } else {
+            OMElement firstChildWithName = arg
+                    .getFirstChildWithName(new QName(null, UIGeneratorConstants.ARGUMENT_NAME));
+            String name = firstChildWithName.getText();
+            String label = firstChildWithName.getAttributeValue(new QName(UIGeneratorConstants.ARGUMENT_LABEL));
+
+            if (label == null) {
+                label = name;
+            }
+            UIComponent passwordField = new PasswordField(label, name, null, mandatoryAttribute, widgetName, value,
+                    hasValue, isReadOnly, tooltip, false);
+            table.append(passwordField.generate());
+        }
+        return columnCount;
     }
 
     private void processElements(OMElement widget, OMElement data, HttpServletRequest request, ServletConfig config,
@@ -295,6 +351,10 @@ public class GenericUIGenerator {
                         DropDown dropDown = new DropDown(label, isReadOnly, name, elementId, null, optionValues.toArray(
                                 new String[optionValues.size()]), widgetName, value, tooltip, false);
                         table.append(dropDown.generate());
+                    } else if (UIGeneratorConstants.PASSWORD_FIELD.equals(elementType)) {
+                        PasswordField passwordField = new PasswordField(label, name, elementId, null, widgetName, value,
+                                true, isReadOnly, tooltip, false);
+                        table.append(passwordField.generate());
                     } else if (UIGeneratorConstants.TEXT_AREA_FIELD.equals(elementType)) {
                         int height = -1;
                         int width = 200;
